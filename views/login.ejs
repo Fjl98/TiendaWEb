@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Iniciar sesión</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/formularios.css">
+</head>
+<body>
+  <header>
+    <a class="cabeza" href="/">
+      <img src="/img/logotipo.png" alt="logo" height="60">
+  </a>
+  </header>
+  
+  <form method="POST" action="/login">
+    <h1>Iniciar sesión</h1>
+    <br>
+    <input type="text" name="username" placeholder="Nombre de usuario" required />
+    <br>
+    <input type="password" name="password" placeholder="Contraseña" required />
+    <br>
+    <button type="submit">Iniciar sesión</button>
+    <br>
+    <a href="/register">Si no esta registrado pinche aquí.</a>
+    <br>
+    <% if (errorMessage) { %>
+    <p class="error"><%= errorMessage %></p>
+  <% } %>
+  <% if (successMessage) { %>
+    <p class="success"><%= successMessage %></p>
+  <% } %>
+
+  </form>
+</body>
+</html>

@@ -1,0 +1,44 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+body{
+    font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+    background-color: beige;
+    justify-content: center;
+}
+h1{
+    display: flex;
+    justify-content: center;
+    margin: 100px auto;
+   text-decoration: underline; 
+}
+
+.cerrarses{
+    display: flex;
+    text-decoration: none;
+    appearance: none;
+    -webkit-appearance: none;
+    color: white;
+    background-color: black;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 4px 4px 30px black;
+    justify-content: center;
+    margin: 0 auto;
+    width: 300px;
+
+
+}
+
+.cabeza{
+    background-color: rgb(237, 237, 237);
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    margin: 0 auto;
+    box-shadow: 4px 4px 30px black;
+}

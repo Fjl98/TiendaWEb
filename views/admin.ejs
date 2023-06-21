@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/estilos.css">
+</head>
+<body>
+    <h1>Panel de Administración</h1>
+
+    <!-- Formulario para crear un usuario -->
+    <h2>Crear Usuario</h2>
+    <form action="/admin/users" method="POST">
+        <input type="text" name="username" placeholder="Nombre de usuario" required>
+        <input type="password" name="password" placeholder="Contraseña" required>
+        <input type="email" name="email" placeholder="Correo electrónico" required>
+        <button type="submit">Crear</button>
+    </form>
+
+    <!-- Lista de usuarios -->
+    <h2>Usuarios Registrados</h2>
+    <ul>
+        <% users.forEach(function(user) { %>
+            <li>
+                <%= user.username %> - <%= user.email %>
+                <form action="/admin/users/<%= user.id %>?_method=PUT" method="POST">
+                    <input type="text" name="username" placeholder="Nuevo nombre de usuario" required>
+                    <input type="password" name="password" placeholder="Nueva contraseña" required>
+                    <input type="email" name="email" placeholder="Nuevo correo electrónico" required>
+                    <button type="submit">Actualizar</button>
+                </form>
+                <form action="/admin/users/<%= user.id %>?_method=DELETE" method="POST">
+                    <button type="submit">Eliminar</button>
+                </form>
+            </li>
+        <% }); %>
+    </ul>
+</body>
+</html>
