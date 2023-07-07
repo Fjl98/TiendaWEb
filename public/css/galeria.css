@@ -1,0 +1,95 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+body{
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+    height: 100vh;
+    
+}
+nav{
+  box-shadow: 1px 1px 15px black;
+}
+
+h1{
+  display: flex;
+  justify-content: center;
+  margin: 2em auto;
+}
+
+.imagenInicio{
+    display: block;
+    margin: 0 auto;
+    margin-top: 3em;
+    width: 50em;
+    
+}
+
+.contenedor-1{
+    display: flex;
+    justify-content: center;
+    margin: 2em auto;
+}
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+    background-color: #f0f0f0;
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 4px 4px 15px rgb(58, 58, 58);
+    margin: 0 auto;
+  }
+
+  
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  
+  p {
+    color: #888;
+    font-size: 14px;
+  }
+
+  .boton1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 3em auto;
+    -webkit-appearance: none;
+    appearance: none;
+    text-decoration: none;
+    color: white;
+    border-radius: 10px;
+    width: 20em;
+    height: 3em;
+    background-color: black;
+    box-shadow: 4px 4px 15px rgb(58, 58, 58);
+  }
+  a{
+    color: black;
+    text-decoration: none;
+  }
+
+
+  
+
+
+  /* Estilos para tablet */
+  @media only screen and (max-width: 768px) {
+
+  }
+
+
+
+
+  /* Estilos para telÃ©fonos */
+  @media only screen and (max-width: 390px) {
+
+
+    .imagenInicio{
+      width: 30em;
+    }
+  }

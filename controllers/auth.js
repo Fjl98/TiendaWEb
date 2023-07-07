@@ -71,6 +71,7 @@ module.exports = {
         } else {
           if (results.length > 0) {
             const user = results[0];
+            
 
             // Comparar la contraseña ingresada con la almacenada en la base de datos
             bcrypt.compare(password, user.password, (error, isMatch) => {
@@ -81,9 +82,22 @@ module.exports = {
                 if (isMatch) {
                   // Inicio de sesión exitoso
                   // Establecer una cookie para mantener la sesión activa
-                  res.cookie('user', JSON.stringify(user), { httpOnly: true });
-                  req.session.isLoggedIn = true;
+                  //res.cookie('user', JSON.stringify(user), { httpOnly: true });
+                  // Establecer una cookie para mantener la sesión activa
+                   res.cookie('user', JSON.stringify(user), { httpOnly: true });
+                   req.session.isLoggedIn = true;
+
+                    // Establecer la propiedad 'Admin' en el objeto 'user'
+                    user.Admin = 1;
+                    
+                  req.session.user = { username: user.username, Admin: user.Admin };
+                  //req.session.user = user;
+              
+                   // Agregar el console.log() aquí
+                    console.log(req.session.user);
+
                   resolve({ success: true, message: 'Inicio de sesión exitoso' });
+
                 } else {
                   resolve({ success: false, message: 'Contraseña incorrecta' });
                 }
