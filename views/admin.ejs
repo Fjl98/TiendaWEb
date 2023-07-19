@@ -15,30 +15,50 @@
 <link rel="stylesheet" href="/css/panelDeControl.css">
 </head>
 <body>
-    <h1>Panel de Administración</h1>
+
+    <header>
+        <a class="cabeza" href="/">
+            <img src="/img/logotipo.png" alt="logo" height="60">
+        </a>
+    </header>
+
+    <h1 class="titulos">PANEL DE ADMINISTRACIÓN</h1>
+
+
+
 
     <!-- Formulario para crear un usuario -->
-    <h2>Crear nuevo Usuario</h2>
-    <form action="/admin/users" method="POST">
+    <h2 class="titulos2">Crear Nuevo Usuario:</h2>
+    <form class="Actualizar" action="/admin/users" method="POST">
         <input type="text" name="username" placeholder="Nombre de usuario" required>
         <input type="password" name="password" placeholder="Contraseña" required>
         <input type="email" name="email" placeholder="Correo electrónico" required>
         <button type="submit">Crear</button>
     </form>
 
+    <h2 class="titulos2">Usuarios Registrados:</h2>
+    <ul class="tabla">
+        <% users.forEach(function(user) { %>
+            <li>
+                <div class="usuarios"> Usuario:  <%= user.username %>  /  Email:  <%= user.email %> </div>
+            </li>
+        <% }); %>
+    </ul>
+    
+
     <!-- Lista de usuarios -->
-    <h2>Usuarios Registrados</h2>
+    <h2 class="titulos2">Actualización de usuarios Registrados:</h2>
     <ul>
         <% users.forEach(function(user) { %>
             <li>
-                <%= user.username %> / <%= user.email %>
-                <form action="/admin/users/<%= user.id %>?_method=PUT" method="POST">
+                <div class="usuarios"> Usuario:  <%= user.username %>  /  Email:  <%= user.email %> </div>
+                <form class="Actualizar" action="/admin/users/<%= user.id %>?_method=PUT" method="POST">
                     <input type="text" name="username" placeholder="Nuevo nombre de usuario">
                     <input type="password" name="password" placeholder="Nueva contraseña">
                     <input type="email" name="email" placeholder="Nuevo correo electrónico">
                     <button type="submit">Actualizar</button>
                 </form>
-                <form action="/admin/users/<%= user.id %>?_method=DELETE" method="POST">
+                <form class="eliminar" action="/admin/users/<%= user.id %>?_method=DELETE" method="POST">
                     <button type="submit">Eliminar</button>
                 </form>
             </li>

@@ -56,13 +56,37 @@
         <h1>PRODUCTOS</h1>
 
         <div class="contenedor-1">
-          <p>Aquí encontraras los diferentes productos que te podemos ofrecer:</p>
+          <p>Aquí encontraras los diferentes productos que te podemos ofrecer para su hogar:</p>
         </div>
+
+        <div class="product-grid">
+          <% products.forEach(function(product) { %>
+            <div class="product-card">
+              <img src="<%= product.image %>" alt="<%= product.name %>" class="product-image">
+              <h3 class="product-title"><%= product.name %></h3>
+              <h3 class="product-cuerpo"><%= product.description %></h3>
+              <p class="product-price">$<%= product.price %></p>
+              <% if (product.reserved) { %>
+                <button class="reserve-btn reserved" disabled>Reservado</button>
+              <% } else { %>
+                <form action="/productos/reservar/<%= product.id %>" method="POST">
+                  <button class="reserve-btn" type="submit">Reservar</button>
+                </form>
+              <% } %>
+              <% if (req.query.reserveSuccess && req.query.productId === product.id) { %>
+                <div class="message success">¡Reserva exitosa para <%= product.name %>!</div>
+              <% } else if (req.query.reserveError && req.query.productId === product.id) { %>
+                <div class="message error">Error al realizar la reserva para <%= product.name %></div>
+              <% } %>
+            </div>
+          <% }); %>
+        </div>
+        
 
 
 
         <div class="contenedor-1">
-          <p>*PUEDE SER QUE HAYA PRODUCTOS YA RESERVADOS*</p>
+          <p>*PUEDE SER QUE HAYA PRODUCTOS QUE YA NO ESTEN YA QUE SON PIEZAS ÚNICAS*</p>
         </div>
   
 

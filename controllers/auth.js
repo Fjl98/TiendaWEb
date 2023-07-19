@@ -58,9 +58,9 @@ module.exports = {
           }
         }
       });
-    });
+    });  
   },
-
+/* 
   login: function(username, password, res, req) {
     return new Promise((resolve, reject) => {
       // Buscar el usuario en la base de datos
@@ -109,7 +109,59 @@ module.exports = {
         }
       });
     });
+  },  */
+
+  login: function(username, password, res, req) {
+    return new Promise((resolve, reject) => {
+      // Buscar el usuario en la base de datos
+      db.query('SELECT * FROM users WHERE username = ?', [username], (error, results) => {
+        if (error) {
+          console.error('Error al buscar el usuario:', error);
+          reject('Error al buscar el usuario');
+        } else {
+          if (results.length > 0) {
+            const user = results[0];
+  
+            // Comparar la contraseña ingresada con la almacenada en la base de datos
+            bcrypt.compare(password, user.password, (error, isMatch) => {
+              if (error) {
+                console.error('Error al comparar las contraseñas:', error);
+                reject('Error al comparar las contraseñas');
+              } else {
+                if (isMatch) {
+                  // Inicio de sesión exitoso
+                  // Establecer una cookie para mantener la sesión activa
+                  res.cookie('user', JSON.stringify(user), { httpOnly: true });
+                  req.session.isLoggedIn = true;
+  
+                  // Verificar si el usuario es un administrador
+                  if (user.Admin === 1) {
+                    user.isAdmin = true;
+                  } else {
+                    // Si no es un administrador, puedes eliminar la propiedad isAdmin del objeto user
+                    delete user.isAdmin;
+                  }
+  
+                  req.session.user = user;
+  
+                  resolve({ success: true, message: 'Inicio de sesión exitoso' });
+                } else {
+                  resolve({ success: false, message: 'Contraseña incorrecta' });
+                }
+              }
+            });
+          } else {
+            resolve({ success: false, message: 'El usuario no existe. Por favor, regístrate.' });
+          }
+        }
+      });
+    });
   },
+  
+
+
+
+
 
   logout: function(res) {
      // Cerrar sesión eliminando la cookie del usuario

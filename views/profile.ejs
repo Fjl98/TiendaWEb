@@ -22,6 +22,33 @@
 
     <h1>Perfil de <%= username %></h1>
 
+    <% if (products.length > 0) { %>
+        <h2>Artículos Reservados:</h2>
+        <ul>
+          <% products.forEach(function(product) { %>
+            <li><%= product.name %> = $<%= product.price %></li>
+          <% }); %>
+        </ul>
+      <% } else { %>
+        <p>No tienes artículos reservados.</p>
+      <% } %>
+
+            <% if (products.length > 0) { %>
+                <h2>Artículos Reservados:</h2>
+                <ul>
+                <% products.forEach(function(product) { %>
+                    <li>
+                    <%= product.name %> = $<%= product.price %>
+                    <form action="/productos/eliminar/<%= product.id %>" method="POST">
+                        <button type="submit">Comprar</button>
+                    </form>
+                    </li>
+                <% }); %>
+                </ul>
+            <% } else { %>
+                <p>No tienes artículos reservados.</p>
+            <% } %>
+
 
 
 
