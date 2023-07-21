@@ -16,7 +16,7 @@ nav{
     display: block;
     margin: 0 auto;
     margin-top: 3em;
-    width: 50em;
+    width: 40em;
     
 }
 
@@ -34,6 +34,10 @@ footer {
     text-align: center;
     box-shadow: 4px 4px 15px rgb(58, 58, 58);
     margin: 0 auto;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
   }
 
   
@@ -44,7 +48,7 @@ footer {
   
   p {
     color: #888;
-    font-size: 14px;
+    font-size: 18px;
   }
 
   .boton1{
@@ -61,6 +65,7 @@ footer {
     height: 3em;
     background-color: black;
     box-shadow: 4px 4px 15px rgb(58, 58, 58);
+    font-size: 20px;
   }
   a{
     color: black;
@@ -74,16 +79,69 @@ footer {
   /* Estilos para tablet */
   @media only screen and (max-width: 768px) {
 
+    .imagenInicio{
+      width: 35em;
+      margin-top: 6em;
+    }
+
+
+    .boton1{
+      width: 15em;
+      height: 2.5em;
+      margin: 2em auto;
+      font-size: 19px;
+    }
+
+    p{
+      font-size: 16px;
+      margin: 2em;
+      text-align: center;
+      
+    }
+    .contenedor-1{
+      display: flex;
+      justify-content: center;
+      margin: 1em auto;
+  }
+
+  footer {
+    height: 7em;
+    }
+
   }
 
 
 
 
-  /* Estilos para telÃ©fonos */
+  /* Estilos para telefonos */
   @media only screen and (max-width: 390px) {
 
-
     .imagenInicio{
-      width: 30em;
+      width: 20em;
+      margin-top: 3em;
     }
+
+    .boton1{
+      width: 10em;
+      height: 2em;
+      margin: 2em auto;
+      font-size: 18px;
+    }
+
+    p{
+      font-size: 14px;
+      margin: 1.5em;
+      text-align: center;
+      
+    }
+    .contenedor-1{
+      display: flex;
+      justify-content: center;
+      margin: 1em auto;
+  }
+
+  footer {
+    height: 7em;
+    }
+    
   }

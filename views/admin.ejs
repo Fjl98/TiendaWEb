@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AdelaidaPorcuna</title>
 
-    <link rel="shortcut icon" href="/public/img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,8 +30,8 @@
 
 <!-- Mostrar la tabla con todos los productos -->
 
-  <h2>Lista de Productos</h2>
-<table>
+  <h2 class="titulos2">Lista de Productos</h2>
+<table class="tabla">
   <thead>
     <tr>
       <th>ID</th>
@@ -39,6 +39,7 @@
       <th>Descripción</th>
       <th>Precio</th>
       <th>Acciones</th>
+      
     </tr>
   </thead>
   <tbody>
@@ -50,10 +51,10 @@
         <td>$<%= product.price %></td>
         <td>
         
-            <a href="#" onclick="editProduct('<%= product.id %>')">Editar</a>
+            <a class="editar" href="#" onclick="editProduct('<%= product.id %>')">Editar</a>
           <!-- Formulario para eliminar el producto -->
           <form method="post" action="/admin/products/<%= product.id %>?_method=DELETE">
-            <button type="submit">Eliminar</button>
+            <button class="produelim" type="submit">Eliminar</button>
           </form>
         </td>
       </tr>
@@ -64,37 +65,37 @@
 
 
 
-<h2>Crear Nuevo Producto</h2>
-<form method="post" action="/admin/products" enctype="multipart/form-data">
-  <label for="name">Nombre:</label>
-  <input type="text" id="name" name="name" required>
+<h2 class="titulos2">Crear Nuevo Producto</h2>
+<form class="productos" method="post" action="/admin/products" enctype="multipart/form-data">
+  <label for="name"></label>
+  <input type="text" id="name" name="name" placeholder="Nombre" required>
   <br>
-  <label for="description">Descripción:</label>
-  <input type="text" id="description" name="description" required>
+  <label for="description"></label>
+  <input type="text" id="description" name="description" placeholder="Descripción" required>
   <br>
-  <label for="price">Precio:</label>
-  <input type="number" id="price" name="price" step="0.01" required>
+  <label for="price"></label>
+  <input type="number" id="price" name="price" step="0.01" placeholder="Precio" required>
   <br>
-  <label for="image">Imagen:</label>
-  <input type="file" id="image" name="image" accept=".jpg, .jpeg, .png" required>
+  <label for="image"></label>
+  <input type="file" id="image" name="image" accept=".jpg, .jpeg, .png" placeholder="Imagen" required>
+
   <button type="submit">Crear Producto</button>
 </form>
 
-<h2>Editar Producto</h2>
-<form id="editForm" method="post" action="" enctype="multipart/form-data">
+<h2 class="titulos2">Editar Producto</h2>
+<form class="productos" id="editForm" method="post" action="" enctype="multipart/form-data">
   <input type="hidden" id="productId" name="productId">
-  <label for="editName">Nombre:</label>
-  <input type="text" id="editName" name="name">
+  <label for="editName"></label>
+  <input type="text" id="editName" name="name" placeholder="Nombre">
   <br>
-  <label for="editDescription">Descripción:</label>
-  <input type="text" id="editDescription" name="description">
+  <label for="editDescription"></label>
+  <input type="text" id="editDescription" name="description" placeholder="Descripción">
   <br>
-  <label for="editPrice">Precio:</label>
-  <input type="number" id="editPrice" name="price" step="0.01">
-  <label for="editImage">Imagen:</label>
-<input type="file" id="editImage" name="image" accept=".jpg, .jpeg, .png">
+  <label for="editPrice"></label>
+  <input type="number" id="editPrice" name="price" step="0.01" placeholder="Precio">
+  <label for="editImage"></label>
+<input class="fotosd" type="file" id="editImage" name="image" accept=".jpg, .jpeg, .png" placeholder="Imagen">
 
-  <br>
   <button type="submit">Guardar Cambios</button>
 </form>
 
@@ -121,7 +122,7 @@
     </form>
 
     <h2 class="titulos2">Usuarios Registrados:</h2>
-    <ul class="tabla">
+    <ul class="tabla1">
         <% users.forEach(function(user) { %>
             <li>
                 <div class="usuarios"> Usuario:  <%= user.username %>  /  Email:  <%= user.email %> </div>

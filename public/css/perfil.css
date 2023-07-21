@@ -22,19 +22,26 @@ h2{
      
 
 }
+.imagen{
+    width: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  padding-bottom: 1em;
+}
 
 p{
     display: flex;
     justify-content: center;
 }
 
-ul{
+
+li{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: white;
-    width: 30%;
+    width: 50%;
     border: 1px solid black;
     border-radius: 10px;
     padding: 1em;
@@ -53,10 +60,10 @@ ul{
     background-color: black;
     border-radius: 10px;
     padding: 20px;
-    box-shadow: 4px 4px 30px black;
     justify-content: center;
     margin: 4em auto;
-    width: 300px;
+    width: 20em;
+    cursor: pointer;
 
 
 }
@@ -71,3 +78,26 @@ ul{
     margin: 0 auto;
     box-shadow: 4px 4px 30px black;
 }
+
+
+  /* Estilos para tablet */
+  @media only screen and (max-width: 768px) {
+
+  }
+
+
+
+
+  /* Estilos para telefonos */
+  @media only screen and (max-width: 390px) {
+
+    .cerrarses{
+        margin: 2em auto;
+        width: 13em;
+    }
+    li{
+        font-size: 1em;
+    }
+    
+   
+  }

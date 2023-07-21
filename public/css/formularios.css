@@ -79,3 +79,56 @@ a:hover{
     box-shadow: 4px 4px 30px black;
 }
 
+
+  /* Estilos para tablet */
+  @media only screen and (max-width: 768px) {
+
+  }
+
+
+
+
+  /* Estilos para telefonos */
+  @media only screen and (max-width: 390px) {
+
+    form{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 50px auto;
+        padding: 20px;
+        border-radius: 10px;
+        width: 300px;
+        height: 300px;
+        background-color: rgb(241, 241, 241);
+        box-shadow: 3px 3px 20px black;
+    
+    }
+
+    input{
+        border: 1px solid black;
+        width: 300px;
+        height: 25px;
+        border-radius: 10px;
+        padding: 2px;
+    }
+
+    button{
+        -webkit-appearance: none;
+        appearance: none;
+        background-color: black;
+        color: white;
+        width: 170px;
+        height: 35px;
+        border: none;
+        box-shadow: 3px 3px 10px black;
+    
+        border-radius: 10px;
+    
+    }
+    a{
+        font-size: 0.8em;
+    }
+    
+  }

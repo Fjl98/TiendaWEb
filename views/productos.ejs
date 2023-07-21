@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AdelaidaPorcuna</title>
 
-    <link rel="shortcut icon" href="/public/img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -39,6 +39,11 @@
               <li class="nav-item">
                 <a class="nav-link" href="/galeria">Galeria</a>
               </li>
+              <% if (isAuthenticated && isAdmin) { %>
+                <li class="nav-item">
+                  <a class="nav-link" href="/admin">Panel de administración</a>
+                </li>
+              <% } %>
               <li class="nav-item">
                 <% if (isAuthenticated) { %>
                   <a class="nav-link" href="/profile">Perfil de <%= username %></a>
@@ -65,7 +70,7 @@
               <img src="<%= product.image %>" alt="<%= product.name %>" class="product-image">
               <h3 class="product-title"><%= product.name %></h3>
               <h3 class="product-cuerpo"><%= product.description %></h3>
-              <p class="product-price">$<%= product.price %></p>
+              <p class="product-price"><%= product.price %>€</p>
               <% if (product.reserved) { %>
                 <button class="reserve-btn reserved" disabled>Reservado</button>
               <% } else { %>

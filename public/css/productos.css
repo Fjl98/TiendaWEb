@@ -17,13 +17,6 @@ h1{
   margin: 2em auto;
 }
 
-.imagenInicio{
-    display: block;
-    margin: 0 auto;
-    margin-top: 3em;
-    width: 50em;
-    
-}
 
 .contenedor-1{
     display: flex;
@@ -42,31 +35,14 @@ footer {
   }
 
   
-  .container {
-    max-width: 960px;
-    margin: 0 auto;
-  }
+
   
   p {
     color: #888;
     font-size: 14px;
   }
 
-  .boton1{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 3em auto;
-    -webkit-appearance: none;
-    appearance: none;
-    text-decoration: none;
-    color: white;
-    border-radius: 10px;
-    width: 20em;
-    height: 3em;
-    background-color: black;
-    box-shadow: 4px 4px 15px rgb(58, 58, 58);
-  }
+  
   a{
     color: black;
     text-decoration: none;
@@ -76,7 +52,7 @@ footer {
   .product-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
+    gap: 30px;
     margin: 5em;
   }
 
@@ -84,16 +60,19 @@ footer {
     border: 1px solid #ccc;
     padding: 10px;
     text-align: center;
+    border-radius: 10px;
+    box-shadow: 2px 2px 20px black;
+    
   }
 
 .product-image {
   width: 100%;
-  max-height: 200px;
   object-fit: cover;
+  border-radius: 10px;
 }
 
 .product-title {
-  font-size: 1.4em;
+  font-size: 1.5em;
   margin: 10px 0;
 }
 
@@ -103,19 +82,12 @@ footer {
   margin: 10px 0;
 }
 
-.product-description {
+.product-price {
   margin-bottom: 10px;
+  font-size: 1.2em;
+  color: black;
 }
 
-.success{
-  
-  color: green;
-
-}
-.error{
-  
-  color: #ff0000;
-}
 
 
 
@@ -128,6 +100,9 @@ footer {
   padding: 5px 10px;
   border: none;
   cursor: pointer;
+  border-radius: 7px;
+  width: 8em;
+  height: 2.5em;
 }
 
 .reserve-btn.reserved {
@@ -138,6 +113,9 @@ footer {
   padding: 5px 10px;
   border: none;
   cursor: pointer;
+  border-radius: 7px;
+  width: 8em;
+  height: 2.5em;
 }
 
 
@@ -147,16 +125,65 @@ footer {
   /* Estilos para tablet */
   @media only screen and (max-width: 768px) {
 
+   
+    
+   
+
   }
 
 
 
 
-  /* Estilos para telÃ©fonos */
+  /* Estilos para telefonos */
   @media only screen and (max-width: 390px) {
 
+    .contenedor-1{
+      display: flex;
+      justify-content: center;
+      text-align: center;
+      margin: 2em auto;
+  }
 
-    .imagenInicio{
-      width: 30em;
-    }
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin: 5em auto;
+    justify-content: center;
+  }
+
+  .product-card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 2px 2px 20px black;
+    width: 19em;
+    margin: 0 auto;
+  }
+
+.product-image {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.product-title {
+  font-size: 1.2em;
+  margin: 10px 0;
+}
+
+.product-cuerpo {
+  color: rgb(163, 163, 163);
+  font-size: 0.8em;
+  margin: 10px 0;
+}
+
+.product-price {
+  margin-bottom: 10px;
+  font-size: 1em;
+}
+
+
+    
   }

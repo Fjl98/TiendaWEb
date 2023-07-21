@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AdelaidaPorcuna</title>
 
-    <link rel="shortcut icon" href="/public/img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,26 +22,18 @@
 
     <h1>Perfil de <%= username %></h1>
 
-    <% if (products.length > 0) { %>
-        <h2>Artículos Reservados:</h2>
-        <ul>
-          <% products.forEach(function(product) { %>
-            <li><%= product.name %> = €<%= product.price %></li>
-          <% }); %>
-        </ul>
-      <% } else { %>
-        <p>No tienes artículos reservados.</p>
-      <% } %>
+
 
             <% if (products.length > 0) { %>
                 <h2>Artículos Reservados:</h2>
                 <ul>
                 <% products.forEach(function(product) { %>
                     <li>
-                    <%= product.name %> = €<%= product.price %>
-                    <form action="/productos/eliminar/<%= product.id %>" method="POST">
-                        <button type="submit">Comprar</button>
-                    </form>
+                        <img class="imagen" src="<%= product.image %>" alt="<%= product.name %>" class="product-image">
+                    <p><%= product.name %> <%= product.price %>€</p>
+                    <form action="/profile/clear-reserved-products" method="POST">
+                        <button class="cerrarses" type="submit" name="productId" value="<%= product.id %>">Comprar</button>
+                      </form>
                     </li>
                 <% }); %>
                 </ul>

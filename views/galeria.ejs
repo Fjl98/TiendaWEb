@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AdelaidaPorcuna</title>
 
-    <link rel="shortcut icon" href="/public/img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,6 +38,11 @@
           <li class="nav-item">
             <a class="nav-link" href="/galeria">Galeria</a>
           </li>
+          <% if (isAuthenticated && isAdmin) { %>
+            <li class="nav-item">
+              <a class="nav-link" href="/admin">Panel de administración</a>
+            </li>
+          <% } %>
           <li class="nav-item">
             <% if (isAuthenticated) { %>
               <a class="nav-link" href="/profile">Perfil de <%= username %></a>
@@ -50,13 +55,39 @@
     </div>
   </nav>
     
-    <h1>GALERIA</h1>
+    <h1>GALERÍA</h1>
 
 
       <div class="contenedor-1">
         <p>Aquí encontraras una galería con una variedad de fotos y diferentes decoraciones para tener referencia</p>
       </div>
 
+<!-- Mostrar formulario de carga de imágenes solo si el usuario es administrador -->
+<% if (isAdmin) { %>
+  <h2>Agrega las imagenes</h2>
+  <form class="agregar" action="/admin/galeria" method="post" enctype="multipart/form-data">
+    <input type="file" name="image" required>
+    <button type="submit">Agregar Imagen</button>
+  </form>
+<% } %>
+
+
+<!-- Galería de imágenes -->
+
+
+</div>
+<div class="image-grid">
+<% gallery.forEach(image => { %>
+  <div>
+    <img class="image" src="<%= image.path.replace('public', '') %>">
+    <% if (isAdmin) { %>
+  <form method="post" action="/admin/galeria/delete/<%= image.id %>">
+    <button class="Eliminar" type="submit">Eliminar</button>
+    <% } %>
+  </div>
+<% }); %>
+      
+</div>
       
       
       

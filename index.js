@@ -282,17 +282,41 @@ app.post('/productos/reservar/:id', (req, res) => {
   });
 });
 
-app.post('/productos/eliminar/:id', (req, res) => {
-  const productId = req.params.id;
-  
-  // Realiza las operaciones necesarias para eliminar el producto reservado de la base de datos
-  db.query('DELETE FROM reservas WHERE productId = ?', [productId], (error, results) => {
+
+
+app.post('/profile/clear-reserved-products', (req, res) => {
+  const userId = req.session.userId; // Obtener el ID del usuario desde la sesión (o como corresponda)
+  const productId = req.body.productId; // Obtener el ID del producto a eliminar desde el formulario
+
+  // Asumiendo que tienes una conexión a la base de datos llamada "db" (usando MySQL o similar)
+  // Primero, consulta si el producto actualmente está reservado
+  db.query('SELECT reserved FROM products WHERE id = ?', [productId], (error, results) => {
     if (error) {
-      console.error('Error al eliminar el producto reservado:', error);
-      res.redirect('/profile');
+      console.error('Error al obtener el estado de reserva del producto:', error);
+      res.status(500).send('Error al obtener el estado de reserva del producto');
     } else {
-      // Redirige al perfil del usuario después de la eliminación exitosa
-      res.redirect('/profile');
+      if (results.length > 0) {
+        const product = results[0];
+        const isReserved = product.reserved;
+
+        // Si el producto está reservado, lo marcamos como no reservado (false)
+        if (isReserved) {
+          db.query('UPDATE products SET reserved = ? WHERE id = ?', [false, productId], (updateError, updateResults) => {
+            if (updateError) {
+              console.error('Error al actualizar el estado de reserva del producto:', updateError);
+              res.status(500).send('Error al actualizar el estado de reserva del producto');
+            } else {
+              // Estado de reserva actualizado correctamente, redirigir al perfil nuevamente
+              res.redirect('/profile');
+            }
+          });
+        } else {
+          // Si el producto no está reservado, simplemente redirigimos al perfil nuevamente sin hacer cambios
+          res.redirect('/profile');
+        }
+      } else {
+        res.status(404).send('Producto no encontrado');
+      }
     }
   });
 });
@@ -302,26 +326,79 @@ app.post('/productos/eliminar/:id', (req, res) => {
 
 
 
-
-
-
-
+// Ruta para mostrar la página de la galería normal
 app.get('/galeria', (req, res) => {
-   // Verificar si la cookie del usuario está presente
-    if (req.cookies.user) {
-    // Obtener los datos del usuario almacenados en la cookie
-    const user = JSON.parse(req.cookies.user);
-    // Obtener el nombre del usuario
-    const username = user.username;
-    // Obtener el estado de autenticación y privilegios de administrador
-    const isAuthenticated = true; // Si la cookie del usuario está presente, consideramos al usuario como autenticado
-    const isAdmin = user.Admin === 1; // Verificar si el usuario tiene el rol de administrador
-    // Renderizar la página de inicio con el nombre de usuario y los privilegios de administrador
-    res.render('galeria', { username, isAuthenticated, isAdmin });
-  } else {
-    // La cookie del usuario no está presente
-    res.render('galeria', { username: null, isAuthenticated: false, isAdmin: false });
-  }
+  // Obtener las fotos existentes de la base de datos
+  db.query('SELECT * FROM gallery', (error, results) => {
+    if (error) {
+      console.error('Error al obtener las fotos de la galería:', error);
+      res.status(500).send('Error al obtener las fotos de la galería');
+    } else {
+      const gallery = results; // Suponiendo que los datos de las fotos están en "results"
+      // Verificar si la cookie del usuario está presente
+      if (req.cookies.user) {
+        // Obtener los datos del usuario almacenados en la cookie
+        const user = JSON.parse(req.cookies.user);
+        // Obtener el nombre del usuario
+        const username = user.username;
+        // Obtener el estado de autenticación y privilegios de administrador
+        const isAuthenticated = true; // Si la cookie del usuario está presente, consideramos al usuario como autenticado
+        const isAdmin = user.Admin === 1; // Verificar si el usuario tiene el rol de administrador
+        // Renderizar la página de galería normal con el nombre de usuario y los privilegios de administrador
+        res.render('galeria', { gallery, username, isAuthenticated, isAdmin });
+      } else {
+        // La cookie del usuario no está presente, renderizar la página de galería normal sin información de usuario
+        res.render('galeria', { gallery, username: null, isAuthenticated: false, isAdmin: false });
+      }
+    }
+  });
+});
+
+// Ruta para mostrar la página de administración de la galería
+app.get('/admin/galeria', authMiddleware, adminMiddleware, (req, res) => {
+  // Obtener las fotos existentes de la base de datos
+  db.query('SELECT * FROM gallery', (error, results) => {
+    if (error) {
+      console.error('Error al obtener las fotos de la galería:', error);
+      res.status(500).send('Error al obtener las fotos de la galería');
+    } else {
+      const gallery = results; // Suponiendo que los datos de las fotos están en "results"
+      res.render('admin/galeria', {
+        gallery,
+        isAuthenticated: req.isAuthenticated,
+        isAdmin: req.isAdmin,
+      });
+    }
+  });
+});
+
+
+app.post('/admin/galeria', adminMiddleware, upload.single('image'), (req, res) => {
+  const imagePath = req.file ? `\\img\\${req.file.filename}` : undefined; // Ruta de la nueva foto o undefined si no se cargó ninguna foto
+
+  // Insertar la nueva foto en la base de datos
+  db.query('INSERT INTO gallery (path) VALUES (?)', [imagePath], (error, results) => {
+    if (error) {
+      console.error('Error al agregar la nueva foto:', error);
+      res.status(500).send('Error al agregar la nueva foto');
+    } else {
+      res.redirect('/galeria'); // Redirigir a la página de administración de la galería después de agregar la foto
+    }
+  });
+});
+// Ruta para eliminar una foto de la galería
+app.post('/admin/galeria/delete/:id', authMiddleware, adminMiddleware, (req, res) => {
+  const imageId = req.params.id;
+
+  // Eliminar la foto de la base de datos usando el ID
+  db.query('DELETE FROM gallery WHERE id = ?', [imageId], (error, results) => {
+    if (error) {
+      console.error('Error al eliminar la foto:', error);
+      res.status(500).send('Error al eliminar la foto');
+    } else {
+      res.redirect('/galeria'); // Redirigir a la página de administración de la galería después de eliminar la foto
+    }
+  });
 });
 
 
@@ -351,36 +428,6 @@ function getUsersFromDatabase(callback) {
 
 
 
-
-
-
-
-
-
-
- // Ruta para el panel de administración
-/*  app.get('/admin', adminMiddleware, (req, res) => {
-  console.log(req.session.user.Admin);
-  // Obtener los usuarios de la base de datos
-  getUsersFromDatabase((users) => {
-    // Verificar si la cookie del usuario está presente
-    if (req.cookies.user) {
-      // Obtener los datos del usuario almacenados en la cookie
-      const user = JSON.parse(req.cookies.user);
-      // Obtener el nombre del usuario
-      const username = user.username;
-      // Obtener el estado de autenticación y privilegios de administrador
-      const isAuthenticated = true; // Si la cookie del usuario está presente, consideramos al usuario como autenticado
-      const isAdmin = user.Admin === 1; // Verificar si el usuario tiene el rol de administrador
-      // Renderizar la página de inicio con el nombre de usuario y los privilegios de administrador
-      res.render('admin', { username, isAuthenticated, isAdmin, users });
-    } else {
-      // La cookie del usuario no está presente
-      res.render('admin', { username: null, isAuthenticated: false, isAdmin: false, users });
-    }
-  });
-  
-}); */
 
 
 app.get('/admin', adminMiddleware, (req, res) => {
@@ -477,7 +524,7 @@ router.post('/admin/users', adminMiddleware, (req, res) => {
                 console.error('Error al registrar el usuario:', error);
                 res.status(500).send('Error al registrar el usuario');
               } else {
-                res.status(201).send('¡Registro exitoso! El usuario ha sido creado.');
+                res.redirect('/admin');
               
               }
             });
@@ -517,7 +564,7 @@ router.put('/admin/users/:id', adminMiddleware, (req, res) => {
                 console.error('Error al actualizar el usuario:', error);
                 res.status(500).send('Error al actualizar el usuario');
               } else {
-                res.status(200).send('Usuario actualizado exitosamente');
+                res.redirect('/admin');
               }
             });
           }
@@ -546,7 +593,7 @@ router.delete('/admin/users/:id', adminMiddleware, (req, res) => {
             console.error('Error al eliminar el usuario:', error);
             res.status(500).send('Error al eliminar el usuario');
           } else {
-            res.status(200).send('Usuario eliminado exitosamente');
+            res.redirect('/admin');
           }
         });
       } else {
@@ -654,13 +701,20 @@ app.put('/admin/products/:id', adminMiddleware, upload.single('image'), (req, re
   const { name, description, price } = req.body;
   const image = req.file ? req.file.path : undefined; // Nueva imagen o undefined si no se cargó una nueva imagen
 
+  // Modificar la ruta de la imagen si se cargó una nueva imagen
+  let imagePathInDb;
+  if (image) {
+    const imageName = req.file.filename;
+    imagePathInDb = '/img/' + imageName;
+  }
+
   // Actualizar los datos del producto en la base de datos
   const updateData = [name, description, price];
   let updateQuery = 'UPDATE products SET name = ?, description = ?, price = ?';
-  
+
   // Si se cargó una nueva imagen, agregarla a la consulta de actualización
   if (image) {
-    updateData.push(image);
+    updateData.push(imagePathInDb);
     updateQuery += ', image = ?';
   }
 
@@ -672,10 +726,11 @@ app.put('/admin/products/:id', adminMiddleware, upload.single('image'), (req, re
       console.error('Error al actualizar el producto:', error);
       res.status(500).send('Error al actualizar el producto');
     } else {
-      res.status(200).send('Producto actualizado exitosamente');
+      res.redirect('/admin');
     }
   });
 });
+
 
 // Eliminar un producto
 app.delete('/admin/products/:id', adminMiddleware, (req, res) => {

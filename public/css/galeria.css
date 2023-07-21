@@ -15,21 +15,14 @@ nav{
 h1{
   display: flex;
   justify-content: center;
-  margin: 2em auto;
+  margin: 1em auto;
 }
 
-.imagenInicio{
-    display: block;
-    margin: 0 auto;
-    margin-top: 3em;
-    width: 50em;
-    
-}
 
 .contenedor-1{
     display: flex;
     justify-content: center;
-    margin: 2em auto;
+    margin: 0 auto;
 }
 footer {
   display: flex;
@@ -40,56 +33,96 @@ footer {
     text-align: center;
     box-shadow: 4px 4px 15px rgb(58, 58, 58);
     margin: 0 auto;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
   }
 
-  
-  .container {
-    max-width: 960px;
-    margin: 0 auto;
-  }
-  
+
   p {
     color: #888;
-    font-size: 14px;
+    font-size: 1em;
+    margin: 2em;
+    text-align: center;
   }
 
-  .boton1{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 3em auto;
-    -webkit-appearance: none;
-    appearance: none;
-    text-decoration: none;
-    color: white;
-    border-radius: 10px;
-    width: 20em;
-    height: 3em;
-    background-color: black;
-    box-shadow: 4px 4px 15px rgb(58, 58, 58);
-  }
   a{
     color: black;
     text-decoration: none;
   }
 
+  .image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    justify-items: center;
+    padding: 20px;
+  }
+  h2{
+    margin: 2em;
+  }
+  
+
+  .agregar{
+    display: flex;
+    justify-content: center;
+  }
+  
+  .image {
+    max-width: 100%;
+    max-height: 400px;
+    border-radius: 5px;
+  }
+  
+ 
+  .Eliminar{
+    appearance: none;
+    -webkit-appearance: none;
+    color: white;
+    background-color: black;
+    border-radius: 7px;
+    margin: 0.5em auto;
+  }
 
   
 
 
   /* Estilos para tablet */
   @media only screen and (max-width: 768px) {
+    footer{
+      position: relative;
+    }
 
   }
 
 
 
 
-  /* Estilos para telÃ©fonos */
+  /* Estilos para telefonos */
   @media only screen and (max-width: 390px) {
-
-
-    .imagenInicio{
-      width: 30em;
+    p {
+      color: #888;
+      font-size: 0.7em;    
     }
+
+    .agregar{
+      display: flex;
+      justify-content: center;
+      width: 27em;
+      margin: 0 auto;
+      font-size: 0.6em;
+    }
+    
+    
+    .Eliminar{
+      appearance: none;
+      -webkit-appearance: none;
+      color: white;
+      background-color: black;
+      border-radius: 7px;
+      margin: 0.5em;
+    }
+
+   
   }
