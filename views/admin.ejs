@@ -6,16 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AdelaidaPorcuna</title>
 
-    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon"><!-- favicon -->
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com"> <!-- tipografia -->
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet"> 
     
-<link rel="stylesheet" href="/css/panelDeControl.css">
+<link rel="stylesheet" href="/css/panelDeControl.css">  <!-- hoja css -->
 </head>
 <body>
-
+<!-- cabecero -->
     <header>
         <a class="cabeza" href="/">
             <img src="/img/logotipo.png" alt="logo" height="60">
@@ -63,7 +63,7 @@
 </table>
 
 
-
+<!-- crear nuevo producto -->
 
 <h2 class="titulos2">Crear Nuevo Producto</h2>
 <form class="productos" method="post" action="/admin/products" enctype="multipart/form-data">
@@ -81,6 +81,8 @@
 
   <button type="submit">Crear Producto</button>
 </form>
+
+<!-- EDITAR PRODUCTO -->
 
 <h2 class="titulos2">Editar Producto</h2>
 <form class="productos" id="editForm" method="post" action="" enctype="multipart/form-data">
@@ -120,7 +122,7 @@
         <input type="email" name="email" placeholder="Correo electrónico" required>
         <button type="submit">Crear</button>
     </form>
-
+<!-- LISTA DE USUARIOS -->
     <h2 class="titulos2">Usuarios Registrados:</h2>
     <ul class="tabla1">
         <% users.forEach(function(user) { %>
@@ -131,7 +133,7 @@
     </ul>
     
 
-    <!-- Lista de usuarios -->
+    <!-- Lista de usuarios PARA ACTUALIZAR-->
     <h2 class="titulos2">Actualización de usuarios Registrados:</h2>
     <ul>
         <% users.forEach(function(user) { %>
@@ -152,6 +154,7 @@
 </body>
 
 <script>
+  //PARA EDITAR LOS PRODUCTOS QUE SE PONGA EN LOS CAMPOS
     function editProduct(productId) {
       // Obtener los detalles del producto mediante una solicitud AJAX
       fetch(`/admin/products/${productId}`)

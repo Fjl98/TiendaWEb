@@ -7,18 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AdelaidaPorcuna</title>
 
-    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon"> <!-- FAVICON -->
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com"> <!-- TIPOGRAFÍAS -->
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet"> 
 
     
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/galeria.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous"><!-- BOOSTRAP -->
+    <link rel="stylesheet" href="/css/galeria.css"> <!-- ESTILO CSS -->
   </head>
 <body>
-
+<!-- NAVEGACION -->
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
     <a class="navbar-brand" href="/">
@@ -79,10 +79,10 @@
 <div class="image-grid">
 <% gallery.forEach(image => { %>
   <div>
-    <img class="image" src="<%= image.path.replace('public', '') %>">
-    <% if (isAdmin) { %>
+    <img class="image" src="<%= image.path.replace('public', '') %>"> <!-- COGE LA RUTA DE LA IMAGEN -->
+    <% if (isAdmin) { %> <!-- SI ES ADMIN PUEDEN SALIR ESTAS ACCIONES -->
   <form method="post" action="/admin/galeria/delete/<%= image.id %>">
-    <button class="Eliminar" type="submit">Eliminar</button>
+    <button class="Eliminar" type="submit">Eliminar</button> <!-- ELIMINAR -->
     <% } %>
   </div>
 <% }); %>
@@ -91,7 +91,7 @@
       
       
       
-
+<!-- PIE DE PAGINA -->
       <footer>
         
         <p>&copy; 2023 <a href="https://portfolio-franciscojesuslaguna.netlify.app">Fº jesus Laguna</a>. Todos los derechos reservados.</p>
@@ -99,6 +99,6 @@
     </footer>
       
     
-</body>
+</body><!-- BOOSTRAP -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 </html>

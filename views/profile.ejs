@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AdelaidaPorcuna</title>
 
-    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon"> <!-- FAVICON -->
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com"> <!-- TIPOGRAFIAS -->
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/perfil.css">
+    <link rel="stylesheet" href="/css/perfil.css"> <!-- HOJA DE ESTILOS -->
 </head>
 <body>
     <header>
@@ -19,11 +19,11 @@
             <img src="/img/logotipo.png" alt="logo" height="60">
         </a>
     </header>
-
+    <!-- USUARIO -->
     <h1>Perfil de <%= username %></h1>
 
 
-
+    <!-- CARRITO DE PRODUCTOS -->
             <% if (products.length > 0) { %>
                 <h2>Artículos Reservados:</h2>
                 <ul>
@@ -32,7 +32,7 @@
                         <img class="imagen" src="<%= product.image %>" alt="<%= product.name %>" class="product-image">
                     <p><%= product.name %> <%= product.price %>€</p>
                     <form action="/profile/clear-reserved-products" method="POST">
-                        <button class="cerrarses" type="submit" name="productId" value="<%= product.id %>">Comprar</button>
+                        <button class="cerrarses" type="submit" name="productId" value="<%= product.id %>">Comprar</button> <!-- ELIMINA EL PRODUCTO DE RESERVAS -->
                       </form>
                     </li>
                 <% }); %>
@@ -45,7 +45,7 @@
 
 
 
-
+<!-- CERRAR SESION -->
 
     <a class="cerrarses" href="/logout">Cerrar sesión</a>
 </body>

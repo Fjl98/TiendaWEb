@@ -3,7 +3,7 @@
     margin: 0;
 }
 body{
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat', sans-serif; /*TIPOGRAFIA*/
   font-weight: 400;
     height: 100vh;
     
@@ -17,12 +17,13 @@ h1{
   margin: 2em auto;
 }
 
-
+/*TEXTO*/
 .contenedor-1{
     display: flex;
     justify-content: center;
     margin: 2em auto;
 }
+/*PIE DE PAGINA*/
 footer {
   display: flex;
   justify-content: center;
@@ -48,14 +49,14 @@ footer {
     text-decoration: none;
   }
 
-
+/*GRID DE LOS PRODUCTOS*/
   .product-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
     margin: 5em;
   }
-
+/*CARD DEL PRODUCTO*/
   .product-card {
     border: 1px solid #ccc;
     padding: 10px;
@@ -64,24 +65,24 @@ footer {
     box-shadow: 2px 2px 20px black;
     
   }
-
+/*IMAGEN*/
 .product-image {
   width: 100%;
   object-fit: cover;
   border-radius: 10px;
 }
-
+/*TITULO*/
 .product-title {
   font-size: 1.5em;
   margin: 10px 0;
 }
-
+/*DESCRIPCION*/
 .product-cuerpo {
   color: rgb(163, 163, 163);
   font-size: 1em;
   margin: 10px 0;
 }
-
+/*PRECIO*/
 .product-price {
   margin-bottom: 10px;
   font-size: 1.2em;
@@ -91,7 +92,7 @@ footer {
 
 
 
-
+/*BOTON DE RESERVA*/
 .reserve-btn{
   -webkit-appearance: none;
   appearance: none;

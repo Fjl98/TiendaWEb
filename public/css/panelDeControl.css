@@ -3,11 +3,11 @@
     margin: 0;
 }
 body{
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', sans-serif; /*TIPOGRAFIAS*/
   font-weight: 400;
     background-color: beige;
 }
-
+/*TITULOS*/
 .titulos{
   display: flex;
   justify-content: center;
@@ -15,12 +15,13 @@ body{
   font-weight: bold;
   text-decoration: underline;
 }
+/*NOMBRES DE LOS USUARIOS*/
 .usuarios{
   margin-left: 3em;
   font-weight: bold;
   font-size: 1.2em;
 }
-
+/*TABLA DE ALMACENAR PRODUCTOS*/
 .tabla{
   flex-direction: column;
   display: flex;
@@ -33,7 +34,7 @@ body{
   background-color: rgb(237, 237, 237);
 
 }
-
+/*TABLA DE ALMACENAR USUARIOS*/
 .tabla1{
   flex-direction: column;
   display: flex;
@@ -53,7 +54,7 @@ body{
   margin-bottom: 3em;
   font-weight: bold;
 }
-
+/*HEADER*/
 .cabeza{
   background-color: rgb(237, 237, 237);
   width: 100%;
@@ -64,7 +65,7 @@ body{
   margin: 0 auto;
   box-shadow: 4px 4px 30px black;
 }
-
+/*FORMULARIO*/
 .Actualizar{
   display: flex;
   flex-direction: column;
@@ -79,7 +80,7 @@ body{
   box-shadow: 3px 3px 20px black;
 
 }
-
+/*LISTA*/
 .productos{
   display: flex;
   flex-direction: column;
@@ -104,7 +105,7 @@ input{
   margin: 0.7em;
 }
 
-
+/*BOTONES*/
 button{
   display: flex;
   align-items: center;
@@ -126,12 +127,13 @@ button{
 button:hover{
   background-color: rgb(46, 46, 46);
 }
-
+/*EDITAR PRODUCTO*/
 .editar{
   color: black;
   text-decoration: none;
   font-weight: bold;
 }
+/*PERSONALIZAR TABLA*/
 th{
   padding: 1.2em;
   
@@ -141,7 +143,7 @@ td{
   padding: 1.4em;
 }
 
-
+/*BOTON ELIMINAR PRODUCTOS*/
 .produelim{
   display: flex;
   align-items: center;

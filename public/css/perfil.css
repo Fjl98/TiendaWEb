@@ -3,7 +3,7 @@
     margin: 0;
 }
 body{
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', sans-serif; /*TIPOGRAFIAS*/
   font-weight: 400;
     background-color: beige;
     justify-content: center;
@@ -22,6 +22,7 @@ h2{
      
 
 }
+/*IMAGEN PRODUCTO*/
 .imagen{
     width: 100%;
   object-fit: cover;
@@ -34,7 +35,7 @@ p{
     justify-content: center;
 }
 
-
+/*PRODUCTOS*/
 li{
     display: flex;
     flex-direction: column;
@@ -50,7 +51,7 @@ li{
     font-weight: bold;
     font-size: 1.5em;
 }
-
+/*BOTON CERRAR SESION Y ELIMINAR*/
 .cerrarses{
     display: flex;
     text-decoration: none;
@@ -67,7 +68,7 @@ li{
 
 
 }
-
+/*HEADER*/
 .cabeza{
     background-color: rgb(237, 237, 237);
     width: 100%;

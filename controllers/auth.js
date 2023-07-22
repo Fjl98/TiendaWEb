@@ -1,3 +1,4 @@
+//AQUÍ SE ALMACENA LASS LÓGICAS DEL LOGIN REGISTRO Y CERRAR SESION
 const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
@@ -25,7 +26,7 @@ app.use(session({
   saveUninitialized: true,
 }));
 
-
+//LOGICA DEL REGISTRO
 module.exports = {
   register: function(username, password, email) {
     return new Promise((resolve, reject) => {
@@ -60,7 +61,7 @@ module.exports = {
       });
     });  
   },
-
+//LOGICA DEL INICIO DE SESION
   login: function(username, password, res, req) {
     return new Promise((resolve, reject) => {
       // Buscar el usuario en la base de datos
@@ -92,7 +93,7 @@ module.exports = {
                     delete user.isAdmin;
                   }
   
-                  req.session.user = user;
+                  req.session.user = user; //PARA QUE ME MANDE LA SESION DEL USUARIO 
   
                   resolve({ success: true, message: 'Inicio de sesión exitoso' });
                 } else {
@@ -112,7 +113,7 @@ module.exports = {
 
 
 
-
+//LOGICA PARA CERRAR SESION
   logout: function(res) {
      // Cerrar sesión eliminando la cookie del usuario
     res.clearCookie('user');

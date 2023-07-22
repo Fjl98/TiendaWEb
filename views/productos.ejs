@@ -7,19 +7,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AdelaidaPorcuna</title>
 
-    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon"> <!-- FAVICON -->
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com"> <!-- TIPOGRAFIAS -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
 
 
     
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/productos.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous"> <!-- BOOSTRAP -->
+    <link rel="stylesheet" href="/css/productos.css"> <!-- HOJA DE ESTILOS -->
   </head>
 <body>
-
+<!-- NAVEGACION -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
         <a class="navbar-brand" href="/">
@@ -56,14 +56,14 @@
         </div>
       </nav>
 
-        
+     
         
         <h1>PRODUCTOS</h1>
 
         <div class="contenedor-1">
           <p>Aquí encontraras los diferentes productos que te podemos ofrecer para su hogar:</p>
         </div>
-
+          <!-- LISTA DE PRODUCTOS -->
         <div class="product-grid">
           <% products.forEach(function(product) { %>
             <div class="product-card">
@@ -71,13 +71,13 @@
               <h3 class="product-title"><%= product.name %></h3>
               <h3 class="product-cuerpo"><%= product.description %></h3>
               <p class="product-price"><%= product.price %>€</p>
-              <% if (product.reserved) { %>
+              <% if (product.reserved) { %> <!-- BOTON DE RESERVA -->
                 <button class="reserve-btn reserved" disabled>Reservado</button>
               <% } else { %>
                 <form action="/productos/reservar/<%= product.id %>" method="POST">
                   <button class="reserve-btn" type="submit">Reservar</button>
                 </form>
-              <% } %>
+              <% } %> <!-- MENSAJE DE RESERVA --> 
               <% if (req.query.reserveSuccess && req.query.productId === product.id) { %>
                 <div class="message success">¡Reserva exitosa para <%= product.name %>!</div>
               <% } else if (req.query.reserveError && req.query.productId === product.id) { %>
@@ -109,6 +109,6 @@
       </footer>
     
     
-</body>
+</body> <!-- BOOSTRAP -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 </html>

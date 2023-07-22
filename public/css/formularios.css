@@ -3,11 +3,11 @@
     margin: 0;
 }
 body{
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', sans-serif; /*TIPOGRAFIA*/
   font-weight: 400;
     background-color: beige;
 }
-
+/*FORMULARIO*/
 form{
     display: flex;
     flex-direction: column;
@@ -36,7 +36,7 @@ input{
     border-radius: 10px;
     padding: 2px;
 }
-
+/*BOTONES*/
 button{
     -webkit-appearance: none;
     appearance: none;
@@ -50,7 +50,7 @@ button{
     border-radius: 10px;
 
 }
-
+/*SI SALE BIEN O ERROR EL FORMULARIO*/
 .error{
     color: red;
 }
@@ -67,7 +67,7 @@ button:hover{
 a:hover{
     color: rgb(46, 46, 46);
 }
-
+/*EL HEADER DE LA PAGINA*/
 .cabeza{
     background-color: rgb(237, 237, 237);
     width: 100%;
@@ -82,7 +82,7 @@ a:hover{
 
   /* Estilos para tablet */
   @media only screen and (max-width: 768px) {
-
+/*NO ME HIZO FALTA*/
   }
 
 

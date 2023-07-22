@@ -3,7 +3,7 @@
     margin: 0;
 }
 body{
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat', sans-serif; /*TIPOGRAFIA*/
   font-weight: 400;
     height: 100vh;
     
@@ -18,12 +18,13 @@ h1{
   margin: 1em auto;
 }
 
-
+/*TEXTO DE LA PAGINA*/
 .contenedor-1{
     display: flex;
     justify-content: center;
     margin: 0 auto;
 }
+/*PIE DE PAGINA*/
 footer {
   display: flex;
   justify-content: center;
@@ -51,7 +52,7 @@ footer {
     color: black;
     text-decoration: none;
   }
-
+/*LA GRID DE LA IMAGENES*/
   .image-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -63,19 +64,19 @@ footer {
     margin: 2em;
   }
   
-
+/*BOTON DE AGREGAR*/
   .agregar{
     display: flex;
     justify-content: center;
   }
-  
+  /*TAMAÑO DE LAS IMAGINES*/
   .image {
     max-width: 100%;
     max-height: 400px;
     border-radius: 5px;
   }
   
- 
+ /*BOTON DE ELIMINAR*/
   .Eliminar{
     appearance: none;
     -webkit-appearance: none;

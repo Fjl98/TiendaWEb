@@ -3,7 +3,7 @@
     margin: 0;
 }
 body{
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat', sans-serif; /*tipografias*/
   font-weight: 400;
     height: 100vh;
     
@@ -11,7 +11,7 @@ body{
 nav{
   box-shadow: 1px 1px 15px black;
 }
-
+/*IMAGEN LOGO DE LA MARCA*/
 .imagenInicio{
     display: block;
     margin: 0 auto;
@@ -19,12 +19,13 @@ nav{
     width: 40em;
     
 }
-
+/*TEXTO*/
 .contenedor-1{
     display: flex;
     justify-content: center;
     margin: 2em auto;
 }
+/*PIE DE PAGINA*/
 footer {
   display: flex;
   justify-content: center;
@@ -40,7 +41,7 @@ footer {
     width: 100%;
   }
 
-  
+  /*TEXTO*/
   .container {
     max-width: 960px;
     margin: 0 auto;
@@ -50,7 +51,7 @@ footer {
     color: #888;
     font-size: 18px;
   }
-
+/*BOTON*/
   .boton1{
     display: flex;
     justify-content: center;

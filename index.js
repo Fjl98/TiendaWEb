@@ -1,18 +1,18 @@
+//archivo donde se aloja casi todas las logicas del proyectos coomo crud y rutas
 
-
-const express = require('express');
-const session = require('express-session');
-const bodyParser = require('body-parser');
-const bcrypt = require('bcrypt');
-const dotenv = require('dotenv');
-const path = require('path');
-const db = require('./routes/db');
-const router = express.Router();
-const auth = require('./controllers/auth')
-const cookieParser = require('cookie-parser');
-const methodOverride = require('method-override');
-const app = express();
-const multer = require('multer');
+const express = require('express'); //para usar express
+const session = require('express-session'); // almacena los datos de sesión en el servidor
+const bodyParser = require('body-parser'); //para analizar y procesar los datos de solicitudes HTTP, como JSON o datos de formulario
+const bcrypt = require('bcrypt');  //es un algoritmo diseñado específicamente para hash de contraseñas que encripta
+const dotenv = require('dotenv'); //permite asignar variables a valores que queremos ocultar y así usarlos en el código sin que nadie los vea, incluso en los repositorios remotos
+const path = require('path'); //se usa para ubicar comandos dentro de la jerarquía de directorios
+const db = require('./routes/db'); //para conectar la base de datos
+const router = express.Router(); //Router para crear manejadores de rutas montables y modulares.
+const auth = require('./controllers/auth') //ayudar a identificar al titular de un nombre de dominio en un dominio genérico de nivel superior
+const cookieParser = require('cookie-parser'); //analiza el encabezado Cookie y rellena req. cookies con objeto marcado con los nombres de las cookies
+const methodOverride = require('method-override'); //ampliar o modificar la implementación abstracta o virtual de un método, propiedad, indexador o evento heredado
+const app = express(); //Escritura de manejadores de peticiones con diferentes verbos HTTP en diferentes caminos URL
+const multer = require('multer'); //un middleware procesa y transforma las peticiones entrantes en el servidor
 
 
 
@@ -22,11 +22,11 @@ app.use(methodOverride('_method'));
 
 
 app.use(cookieParser());
-app.set('view engine', 'ejs');
+app.set('view engine', 'ejs'); //el uso de plantilla
 
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'views'));//para ver las views
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'))); //para ver los aprtados de public
 
 
 
@@ -37,7 +37,7 @@ app.use(session({
   resave: true,
   saveUninitialized: true,
 }));
-
+//esto se usa para el middleware para que funcione la autoindentificacion del admin
 app.use((req, res, next) => {
   res.locals.isAuthenticated = req.session.isLoggedIn;
   next();
@@ -73,7 +73,7 @@ const authMiddleware = (req, res, next) => {
   }
 };
 
-
+//middleware del admin
 
 const adminMiddleware = (req, res, next) => {
   // Verificar si el usuario está autenticado y es un administrador
@@ -91,9 +91,7 @@ const adminMiddleware = (req, res, next) => {
 }; 
 
 
-
-
-
+//ruta del registro
 
 app.get('/register', (req, res) => {
   res.render('register', { errorMessage: null, successMessage: null });
@@ -123,18 +121,18 @@ app.get('/login', (req, res) => {
 
 
 
-
-
 // Ruta para el inicio de sesión
 app.post('/login', async (req, res) => {
   const { username, password } = req.body;
 
+
   try {
-    const { success, message } = await auth.login(username, password, res, req);
+    const { success, message, } = await auth.login(username, password, res, req);
 
     if (success) {
       // Inicio de sesión exitoso
       // Redirige al perfil del usuario
+     
       res.redirect('/profile');
     } else {
       // Inicio de sesión fallido
@@ -151,17 +149,12 @@ app.post('/login', async (req, res) => {
 
 
 
-
-
-
 // Ruta para el cierre de sesión
 app.get('/logout', (req, res) => {
   auth.logout(res);
   // Redirige a la página de inicio de sesión u otra página deseada
   res.redirect('/login');
 });
-
-
 
 
 
@@ -196,6 +189,7 @@ app.get('/profile', (req, res) => {
 
 
 
+
 // Ruta para la página de inicio
 app.get('/', (req, res) => {
   // Verificar si la cookie del usuario está presente
@@ -216,9 +210,7 @@ app.get('/', (req, res) => {
 });
 
 
-
-
-
+//ruta de productos
 
 app.get('/productos', (req, res) => {
   db.query('SELECT * FROM products', (error, results) => {
@@ -241,12 +233,13 @@ app.get('/productos', (req, res) => {
         // La cookie del usuario no está presente
         res.render('productos', { req, products: results, username: null, isAuthenticated: false, isAdmin: false });
       }
+      
     }
   });
 });
 
 
-// Manejar la reserva de un producto
+
 app.post('/productos/reservar/:id', (req, res) => {
   if (!req.session.user) {
     res.redirect('/login');
@@ -262,7 +255,7 @@ app.post('/productos/reservar/:id', (req, res) => {
       console.error('Error al obtener el userId:', error);
       res.redirect('/productos?reserveError=true');
     } else {
-      const userId = results[0].id;
+      
 
       // Realizar las operaciones necesarias para guardar la reserva en la tabla "reservas"
       db.query('INSERT INTO reservas (productId, userId) VALUES (?, ?)', [productId, userId], (error, results) => {
@@ -282,7 +275,7 @@ app.post('/productos/reservar/:id', (req, res) => {
   });
 });
 
-
+//el boton de compra para eliminar la reserva
 
 app.post('/profile/clear-reserved-products', (req, res) => {
   const userId = req.session.userId; // Obtener el ID del usuario desde la sesión (o como corresponda)
@@ -362,22 +355,22 @@ app.get('/admin/galeria', authMiddleware, adminMiddleware, (req, res) => {
       console.error('Error al obtener las fotos de la galería:', error);
       res.status(500).send('Error al obtener las fotos de la galería');
     } else {
-      const gallery = results; // Suponiendo que los datos de las fotos están en "results"
+      const gallery = results; // los datos de las fotos están en "results"
       res.render('admin/galeria', {
         gallery,
-        isAuthenticated: req.isAuthenticated,
+        isAuthenticated: req.isAuthenticated, //identifica al usuario para dar las acciones
         isAdmin: req.isAdmin,
       });
     }
   });
 });
 
-
+//ruta para añadir fotos
 app.post('/admin/galeria', adminMiddleware, upload.single('image'), (req, res) => {
   const imagePath = req.file ? `\\img\\${req.file.filename}` : undefined; // Ruta de la nueva foto o undefined si no se cargó ninguna foto
 
   // Insertar la nueva foto en la base de datos
-  db.query('INSERT INTO gallery (path) VALUES (?)', [imagePath], (error, results) => {
+  db.query('INSERT INTO gallery (path) VALUES (?)', [imagePath], (error, results) => { //introducir la ruta en la base de datos
     if (error) {
       console.error('Error al agregar la nueva foto:', error);
       res.status(500).send('Error al agregar la nueva foto');
@@ -407,12 +400,6 @@ app.post('/admin/galeria/delete/:id', authMiddleware, adminMiddleware, (req, res
 
 
 
-
-
-
-
-
-
 // Obtener los usuarios de la base de datos
 function getUsersFromDatabase(callback) {
   db.query('SELECT * FROM users', (error, results) => {
@@ -429,12 +416,12 @@ function getUsersFromDatabase(callback) {
 
 
 
-
+//pagina de administracion  para el panel de control
 app.get('/admin', adminMiddleware, (req, res) => {
   // Obtener los usuarios de la base de datos
   getUsersFromDatabase((users) => {
     // Obtener los productos de la base de datos
-    db.query('SELECT * FROM products', (error, products) => {
+    db.query('SELECT * FROM products', (error, products) => { //ver los productos
       if (error) {
         console.error('Error al obtener los productos:', error);
         res.status(500).send('Error al obtener los productos');
@@ -469,7 +456,7 @@ app.get('/admin', adminMiddleware, (req, res) => {
 
 
 
-//CRUD USUARIOS
+//----------------------------CRUD USUARIOS------------------------------------------
 
 // Mostrar todos los usuarios
 router.get('/admin/users', adminMiddleware, (req, res) => {
@@ -608,7 +595,7 @@ router.delete('/admin/users/:id', adminMiddleware, (req, res) => {
 
 
 
- //CRUD PRODUCTOS
+ //--------------------------------------CRUD PRODUCTOS-------------------------------------------------
 
 // Función para reemplazar barras invertidas con barras diagonales y eliminar el segmento "public"
 function replaceBackslashesWithForwardSlashesAndRemovePublic(str) {
@@ -760,6 +747,6 @@ app.delete('/admin/products/:id', adminMiddleware, (req, res) => {
         console.log('Servidor escuchando en el puerto 5000.');
       });
       
-
+// la exportacion y importacion de datos por router
       module.exports = router;
       app.use(router);
